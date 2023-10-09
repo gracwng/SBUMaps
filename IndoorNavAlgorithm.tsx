@@ -52,8 +52,16 @@ const checkSurroundingTiles = (tileNumber: number, tileIndex: number, mapArray: 
     let indexBelow = -1
     let indexRight = -1
     let indexLeft = -1
+    let node: number [] = []
     // Index of tile above current tile: numCol tiles back
-    if (tileIndex - cols > 0) indexAbove = tileIndex + cols
+    if (tileIndex - cols > 0){
+        indexAbove = tileIndex + cols
+        // if (mapArray[indexAbove] === Tiles.HallwayTile || Tiles.LeftDoor || Tiles.CenterDoor)
+        if (Object.values(Tiles).includes(mapArray[indexAbove])) {
+
+        node.push(mapArray[tileIndex])
+
+    } 
     // Index below current tile: numCol tiles forward
     if (tileIndex + cols < (rows*cols)) indexBelow = tileIndex 
     // Index left of tile: 1 tile back
