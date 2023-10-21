@@ -1,7 +1,7 @@
-import Buildings from './mapRecords'
+import {buildings} from './mapRecords'
 
 // index of gray/hallway and door tiles: 
-let HALLWAYTILE = 6;
+// let HALLWAYTILE = 6;
  
 enum Tiles {
     HallwayTile = 6,
@@ -12,26 +12,34 @@ enum Tiles {
     OpenLeftDoor = 304
 }
 
-// create a map that corresponds the index of a door to its corresponding room number
+// map that corresponds a room number with the indices of the door
+var doorRoomMap: Map <number, number> = new Map();
 
-var doorRoomMap = new Map();
-var doorIndexMap = new Map();
-var hallwayIndexMap = new Map();
+//Set of hallway indices
+var isVisited: Map <number, Boolean> = new Map();
+
 // adjacency list of each valid tiles' index
-var adjLst: [];
-let indoorTileMap = Buildings.freyHall.freyFloor2.array;
+var adjLst: Map <number, Set<number>> = new Map();
 
-const makeAdjLst = (doorRoomMap: Map <number, number>, doorIndexMap: Map <number, boolean>, hallwayIndexMap: Map <number, boolean>, adjLst: number[][], 
-indoorTileMap: Buildings, buildingName: string, floorNumber: string) => {
-    const currentMap = indoorTileMap.buildingName.floorNumber
-    const rows = currentMap.rows
-    const cols = currentMap.cols
-    // for (const tile of currentMap.array){   
-        for (let i = 0; i < currentMap.array.length; i++){
-            const tileNumber = currentMap.array[i]
+// how can I make the code below dynamic? am I referencing them correctly?
+let buildingFloorObject = buildings.freyHall.floor2
+
+let indoorMap: number[] = buildingFloorObject.array
+let indoorMapRows: number = buildingFloorObject.rows
+let indoorMapCols: number = buildingFloorObject.cols
+// const currentMap = indoorTileMap.buildingName.floorNumber.array
+
+// this method returns an adjacency list map of vertices and their valid edges, a map of hallway and door tiles for an isVisited boolean map
+const makeAdjLst = (map: number[], rows: number, cols: number) => {
+    //use a set instead of a map for isVisited
+    var hallwayTilesIndex: Set <number> = new Set();
+    var adjLst: Map <number, Set<number>> = new Map();
+
+    for (let index = 0; index < rows*cols; index++){
+        const tileNumber = map[index]
         switch(tileNumber){
             case (Tiles.HallwayTile):
-                const adjObject = checkSurroundingTiles(tileNumber, i, currentMap.array, rows, cols)
+                const adjObject = checkNeighbors(index, map, rows, cols)
                 break;
             case (Tiles.LeftDoor):
                 break;
@@ -46,40 +54,55 @@ indoorTileMap: Buildings, buildingName: string, floorNumber: string) => {
             default: break;
         }
 }
+}
 
-const checkSurroundingTiles = (tileNumber: number, tileIndex: number, mapArray: number[], rows: number, cols: number) => {
+export function checkNeighbors (index: number, map: number[], rows: number, cols: number): Set <number> {
+    cols = cols + 1
     let indexAbove = -1
     let indexBelow = -1
     let indexRight = -1
     let indexLeft = -1
-    let node: number [] = []
+    let neighbors: Set<number> = new Set();
     // Index of tile above current tile: numCol tiles back
-    if (tileIndex - cols > 0){
-        indexAbove = tileIndex + cols
-        // if (mapArray[indexAbove] === Tiles.HallwayTile || Tiles.LeftDoor || Tiles.CenterDoor)
-        if (Object.values(Tiles).includes(mapArray[indexAbove])) {
-
-        node.push(mapArray[tileIndex])
-
+    if ((index - (cols)) > 0){
+        indexAbove = index - cols 
+        // if the index is a hallway or door tile, then add to neighbors list
+        if (Object.values(Tiles).includes(map[indexAbove]))
+        neighbors.add(indexAbove)
+        console.log('indexAbove', indexAbove, 'mapValue', map[indexAbove])
     } 
     // Index below current tile: numCol tiles forward
-    if (tileIndex + cols < (rows*cols)) indexBelow = tileIndex 
+    if (index + cols < ((rows*cols)+1)){
+        indexBelow = index + cols 
+        if (Object.values(Tiles).includes(map[indexBelow]))
+        neighbors.add(indexBelow)
+        console.log('indexBelow', indexBelow, 'mapValue', map[indexBelow])
+        
+    } 
     // Index left of tile: 1 tile back
-    if (tileIndex + 1)
+    if ((index > 0) && ((index-1) % cols !== 0)){
+        indexLeft = index - 1
+        if (Object.values(Tiles).includes(map[indexLeft]))
+        neighbors.add(indexLeft)
+        console.log('indexLeft', indexLeft, 'mapValue', map[indexLeft])
+
+    }
     // Index right of tile: 1 tile forward
+    if ((index) % cols !== 0){
+        indexRight = index + 1
+        if (Object.values(Tiles).includes(map[indexRight]))
+        neighbors.add(indexRight)
+        console.log('indexRight', indexRight, 'mapValue', map[indexRight])
+       
+    }
+
+    return neighbors
 
 }
 
-const newMaps = {
-    doorRoomMap,
-    doorIndexMap,
-    hallwayIndexMap,
-  };
 
-  // Return the object
-  return newMaps;
 
-}
+
 // const params = makeAdjLst(doorRoomMap, doorIndexMap, hallwayIndexMap, adjLst, indoorTileMap);
 
 // const { doorRoomMap, doorIndexMap, hallwayIndexMap, adjLst, indoorTileMap } = params;
