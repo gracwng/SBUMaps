@@ -50,6 +50,9 @@ test('adjlst creates new list', () => {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-        const list = makeAdjLst(map, 17, 42)
-        console.log(list)
+        const result = makeAdjLst(map, 17, 42)
+
+        console.log(result.adjLst)
+        console.log(result.hallwayTileIndices)
+        
 })

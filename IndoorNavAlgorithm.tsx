@@ -10,21 +10,6 @@ enum Tiles {
     OpenLeftDoor = 304
 }
 
-// // I want to write a method to return the values of all enums as a set
-// const valuesOfEnum = (tile: typeof Tiles): Set <number> => {
-//     let enumVals = new Set<number>()
-//     let values = Object.values(Tiles)
-//     values.forEach((value) => enumVals.add(value))
-//     return enumVals
-// }
-// let enumVals = valuesOfEnum(Tiles)
-
-// console.log(enumVals)
-
-
-// map that corresponds a room number with the indices of the door
-var doorRoomMap: Map <number, number> = new Map();
-
 //Set of hallway indices
 var hallwayTileIndices: Set <number> = new Set();
 
@@ -44,38 +29,25 @@ export function makeAdjLst (map: number[], rows: number, cols: number) {
     var hallwayTileIndices: Set <number> = new Set();
     var adjLst: Map <number, Set<number>> = new Map();
 
+    // loop through entire map
     for (let index = 0; index < rows*cols; index++){
         const tileNumber = map[index]
-        let adjObject: Set<number> = new Set();
-        switch(tileNumber){
-            case (Tiles.HallwayTile):
-                adjObject = checkNeighbors(index, map, rows, cols)
-                adjLst.set(index, adjObject)
-                break;
-            case (Tiles.LeftDoor):
-                adjObject = checkNeighbors(index, map, rows, cols)
-                adjLst.set(index, adjObject)
-                break;
-            case (Tiles.CenterDoor):
-                adjObject = checkNeighbors(index, map, rows, cols)
-                adjLst.set(index, adjObject)
-                break;
-            case (Tiles.RightDoor):
-                adjObject = checkNeighbors(index, map, rows, cols)
-                adjLst.set(index, adjObject)
-                break;
-            case (Tiles.OpenRightDoor):
-                adjObject = checkNeighbors(index, map, rows, cols)
-                adjLst.set(index, adjObject)
-                break;
-            case (Tiles.OpenLeftDoor):
-                adjObject = checkNeighbors(index, map, rows, cols)
-                adjLst.set(index, adjObject)
-                break;
-            default: break;
-        }
+        if (
+            tileNumber === Tiles.HallwayTile ||
+            tileNumber === Tiles.LeftDoor ||
+            tileNumber === Tiles.CenterDoor ||
+            tileNumber === Tiles.RightDoor ||
+            tileNumber === Tiles.OpenRightDoor ||
+            tileNumber === Tiles.OpenLeftDoor
+          ) {
+            const adjObject = checkNeighbors(index, map, rows, cols);
+            adjLst.set(index, adjObject);
+            if (tileNumber != Tiles.HallwayTile)
+            hallwayTileIndices.add(index)
+          }
+          
     }
-    return adjLst
+    return {adjLst, hallwayTileIndices}
 }
 
 export function checkNeighbors (index: number, map: number[], rows: number, cols: number): Set <number> {
