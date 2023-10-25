@@ -55,7 +55,7 @@ test('adjlst creates new list and testing bfs', () => {
         // console.log(result.adjLst)
         // console.log('inital', result.hallwayTileIndices)
 
-        const test = bfs(result.adjLst, 304, 335, new Set<number>(), result.hallwayTileIndices)
+        const test = bfs(result.adjLst, 304, 304, new Set<number>(), result.hallwayTileIndices)
         for (const t of test)
         console.log(t)
         

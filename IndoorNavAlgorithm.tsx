@@ -19,9 +19,6 @@ var adjLst: Map <number, Set<number>> = new Map();
 // how can I make the code below dynamic? 
 let buildingFloorObject = buildings.freyHall.floor2
 
-let indoorMap: number[] = buildingFloorObject.array
-let indoorMapRows: number = buildingFloorObject.rows
-let indoorMapCols: number = buildingFloorObject.cols
 // const currentMap = indoorTileMap.buildingName.floorNumber.array
 
 // this method returns an adjacency list map of vertices and their valid edges, a set of hallwayTiles for the bfs algorithm
@@ -94,7 +91,6 @@ export function checkNeighbors (index: number, map: number[], rows: number, cols
 
 }
 
-
 export function bfs (adjLst: Map <number, Set<number>>, start: number, target: number, isVisited: Set <number>, hallwayTileIndices: Set<number>): number[]{
     // in js and ts, sets/arrays/objects are passed by reference so the underlying object is referred to by the same memory address. that's why I am creating a new set and setting it to isVisited
     isVisited = new Set(hallwayTileIndices)
@@ -134,7 +130,7 @@ export function bfs (adjLst: Map <number, Set<number>>, start: number, target: n
         
         
 
-    }
+}
 
 
 
