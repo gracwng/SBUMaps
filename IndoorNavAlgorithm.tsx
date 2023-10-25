@@ -95,6 +95,51 @@ export function checkNeighbors (index: number, map: number[], rows: number, cols
 }
 
 
+export function bfs (adjLst: Map <number, Set<number>>, start: number, target: number, isVisited: Set <number>, hallwayTileIndices: Set<number>): number[]{
+    // in js and ts, sets/arrays/objects are passed by reference so the underlying object is referred to by the same memory address. that's why I am creating a new set and setting it to isVisited
+    isVisited = new Set(hallwayTileIndices)
+    isVisited.delete(start)
+    isVisited.delete(target)
+        // I will take an iterative approach using a while loop and a queue (in the form of an array) to keep track of potential neighbors
+    let queue: number[][] = [];
+    // initialize queue with the starting node in its own array (because it will be built on as we traverse the queue)
+    queue.push([start]);
+    while (queue.length != 0){
+        // pop first element (list) of the queue
+        // The shift method may return undefined if the array is empty. So, it's a good practice to check if the array is not empty before using shift
+        let currLst: number[] | undefined = queue.shift();
+        if (currLst === undefined) throw new Error("currLst is empty")
+        // get last element in list (without removing it) and mark it as visited
+        let currIndex:number = currLst[currLst.length - 1]
+        isVisited.add(currIndex)
+        // find neighbors of that element
+        let neighbors: Set <number> | undefined = adjLst.get(currIndex)
+        if (neighbors === undefined) throw new Error("neighbors set is empty")
+        // for each unvisited neighbor, if it's the destination node, add destination node to the current list and return it
+        for (const neighbor of neighbors){
+            if (neighbor === target) {
+                currLst.push(neighbor)
+                return currLst
+            }
+         // else if it's unvisited add it to the current list (as a new list) and push it into the end of the queue
+            else{
+                let newLst: number [] = [...currLst, neighbor]
+                queue.push(newLst)
+            }           
+        }
+    }
+    // In the end, if the queue is empty and the final set is the start node, return “no neighbor” 
+    // make sure method that takes this result handles it properly
+    return []    
+        
+        
+
+    }
+
+
+
+
+
 
 
 // const params = makeAdjLst(doorRoomMap, doorIndexMap, hallwayIndexMap, adjLst, indoorTileMap);

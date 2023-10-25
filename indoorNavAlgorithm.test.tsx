@@ -1,4 +1,4 @@
-import { checkNeighbors, makeAdjLst } from './IndoorNavAlgorithm';
+import { checkNeighbors, makeAdjLst, bfs } from './IndoorNavAlgorithm';
 
 // test('neighbors should find neighbors', () => {
 //     let map = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -21,16 +21,16 @@ import { checkNeighbors, makeAdjLst } from './IndoorNavAlgorithm';
 //         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 //     // new trials:
-//     const set = checkNeighbors(348, map, 30, 42)
-//     const realSet = new Set ([391])
-//     console.log(map[252])
+//     const set = checkNeighbors(311, map, 17, 42)
+//     const realSet = new Set ([354])
+//     console.log(map[311])
 //     expect(set).toEqual(realSet)
 //     // console.log(map[348])
 
 
 // });
 
-test('adjlst creates new list', () => {
+test('adjlst creates new list and testing bfs', () => {
     let map = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 1, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 608, 2, 0, 0,
@@ -52,7 +52,16 @@ test('adjlst creates new list', () => {
 
         const result = makeAdjLst(map, 17, 42)
 
-        console.log(result.adjLst)
-        console.log(result.hallwayTileIndices)
+        // console.log(result.adjLst)
+        // console.log('inital', result.hallwayTileIndices)
+
+        const test = bfs(result.adjLst, 304, 335, new Set<number>(), result.hallwayTileIndices)
+        for (const t of test)
+        console.log(t)
+        
+        // console.log('final', result.hallwayTileIndices)
+
         
 })
+
+
