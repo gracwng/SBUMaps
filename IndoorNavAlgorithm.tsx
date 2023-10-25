@@ -104,7 +104,7 @@ export function bfs (adjLst: Map <number, Set<number>>, start: number, target: n
     let queue: number[][] = [];
     // initialize queue with the starting node in its own array (because it will be built on as we traverse the queue)
     queue.push([start]);
-    while (queue.length != 0){
+    while (queue.length !== 0){
         // pop first element (list) of the queue
         // The shift method may return undefined if the array is empty. So, it's a good practice to check if the array is not empty before using shift
         let currLst: number[] | undefined = queue.shift();
@@ -122,7 +122,7 @@ export function bfs (adjLst: Map <number, Set<number>>, start: number, target: n
                 return currLst
             }
          // else if it's unvisited add it to the current list (as a new list) and push it into the end of the queue
-            else{
+            else if (!isVisited.has(neighbor)) {
                 let newLst: number [] = [...currLst, neighbor]
                 queue.push(newLst)
             }           
