@@ -10,15 +10,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* <StatusBar style="auto" /> */}
-      <View style = {styles.header}>
       <Text>Frey Hall Floor 2</Text>
-      </View>
-      <View style = {styles.imageContainer}>
+      {/* <StatusBar style="auto" /> */}
       <Image source = {require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor2.png')}
       style = {styles.image}
       />
-      </View>
       </View>
   );
 }
@@ -28,15 +24,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  header: {
-    alignItems: 'center',
-    // padding: 10
-  },
-  imageContainer: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
