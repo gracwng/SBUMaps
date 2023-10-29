@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import {buildings} from './mapRecords';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import {buildings} from './screens/indoorMap/mapRecords';
 
 export default function App() {
   // let indoorTileMap = Buildings.freyHall.freyFloor2;
@@ -10,10 +10,16 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Welcome to SBUMaps</Text>
-     
-      <StatusBar style="auto" />
-    </View>
+      {/* <StatusBar style="auto" /> */}
+      <View style = {styles.header}>
+      <Text>Frey Hall Floor 2</Text>
+      </View>
+      <View style = {styles.imageContainer}>
+      <Image source = {require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor2.png')}
+      style = {styles.image}
+      />
+      </View>
+      </View>
   );
 }
 
@@ -25,4 +31,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+  header: {
+    alignItems: 'center',
+    // padding: 10
+  },
+  imageContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    flex: 1, // Take up the available space within the View
+    alignSelf: 'center',
+    resizeMode: 'contain',
+    width: '100%', // Set the image width to 100% of the parent View
+    height: '100%', // Set the image height to 100% of the parent View 
+  }
+}
+);
