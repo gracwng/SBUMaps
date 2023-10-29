@@ -1,4 +1,4 @@
-import { checkNeighbors, makeAdjLst, bfs } from './IndoorNavAlgorithm';
+import { checkNeighbors, makeAdjLst, bfs, generatePath } from './IndoorNavAlgorithm';
 
 // test('neighbors should find neighbors', () => {
 //     let map = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -55,9 +55,14 @@ test('adjlst creates new list and testing bfs', () => {
         // console.log(result.adjLst)
         // console.log('inital', result.hallwayTileIndices)
 
-        const test = bfs(result.adjLst, 304, 304, new Set<number>(), result.hallwayTileIndices)
-        for (const t of test)
-        console.log(t)
+        // const test = bfs(result.adjLst, 304, 304, new Set<number>(), result.hallwayTileIndices)
+        const test = bfs(result.adjLst, 304, 420, new Set<number>(), result.hallwayTileIndices)
+
+        // for (const t of test)
+        // console.log(t)
+        const stringPath = generatePath(test, 42, 1);
+        console.log(test)
+        console.log(stringPath)
         
         // console.log('final', result.hallwayTileIndices)
 
