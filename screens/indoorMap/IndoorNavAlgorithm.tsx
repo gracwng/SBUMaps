@@ -141,7 +141,8 @@ export function generatePath (pathIndices: number [], cols: number, tileSize: nu
     for (let index of pathIndices){
         s += " L"
         let colX = (index % (cols + 1)) * tileSize
-        let rowY = Math.floor(index/cols) * tileSize
+        // I'm attaching "+ tileSize/2" because the path/line we draw has to appear in the middle of the hallwaytile
+        let rowY = (Math.floor(index/cols) * tileSize) + tileSize/2
         s += colX + " " + rowY
     }
     // Extract the rest of the string starting from the third character and concatenate the new characters.

@@ -60,7 +60,7 @@ test('adjlst creates new list and testing bfs', () => {
 
         // for (const t of test)
         // console.log(t)
-        const stringPath = generatePath(test, 42, 1);
+        const stringPath = generatePath(test, 42, 32);
         console.log(test)
         console.log(stringPath)
         
