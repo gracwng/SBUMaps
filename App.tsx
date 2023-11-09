@@ -15,8 +15,13 @@ export default function App() {
       <View style = {styles.header}>
         <Text>Frey Hall Floor 2</Text>
       </View>
-       <Svg height="576" width="1376" 
-         style={{ backgroundColor: 'blue' }} // Set the background color to blue
+
+
+       {/* <View style = {{width: 2000, height: 500}}> */}
+       <View style={{ transform: [{ scale: 0.3 }] }}>
+
+        <Svg height="576" width="1376" 
+         style={{ backgroundColor: '#FDF5E6' }} // Set the background color to blue
          >
        <Image
           width="100%" // Makes the image larger than the parent SVG container
@@ -25,12 +30,13 @@ export default function App() {
           preserveAspectRatio="xMidYMid meet"
           href={require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor2.png')} />
       <Path
-      d = "M96 240 L96 272 L128 272 L160 272 L192 272 L224 272 L256 272 L288 272 L320 272 L352 272 L384 272 L416 272 L448 272 L480 272 L512 272 L544 272 L576 272 L608 272 L640 272 L672 272 L704 272 L736 272 L768 272 L800 272 L832 272 L864 272 L896 272 L928 272 L960 272 L992 272 L1024 272 L1056 272 L1056 336"
+      d = "M112 240 L112 272 L144 272 L176 272 L208 272 L240 272 L272 272 L304 272 L336 272 L368 272 L400 272 L432 272 L464 272 L496 272 L528 272 L560 272 L592 272 L624 272 L656 272 L688 272 L720 272 L752 272 L784 272 L816 272 L848 272 L880 272 L912 272 L944 272 L976 272 L1008 272 L1040 272 L1072 272 L1072 336"
       fill="none"
       stroke="blue"
       strokeWidth="5"
     />
   </Svg>
+  </View>
     </View>
     
   );

@@ -140,7 +140,7 @@ export function generatePath (pathIndices: number [], cols: number, tileSize: nu
     // Except for the first coordinate, attach a space and a “L” to the string, and then attach the x coordinate to the string, a space, and then the y coordinate
     for (let index of pathIndices){
         s += " L"
-        let colX = (index % (cols + 1)) * tileSize
+        let colX = ((index % (cols + 1)) * tileSize) + tileSize/2
         // I'm attaching "+ tileSize/2" because the path/line we draw has to appear in the middle of the hallwaytile
         let rowY = (Math.floor(index/cols) * tileSize) + tileSize/2
         s += colX + " " + rowY
