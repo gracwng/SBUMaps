@@ -168,8 +168,32 @@ export function generatePath (pathIndices: number [], cols: number, tileSize: nu
     return s;
 }
 
-export function chooseDoorIndices (){
-
+// ChooseDoorIndices method: when the user enters their desired room numbers (which will be from the fixed list we created), 
+    // we will send those room numbers to a function that will determine the door indices that will give them the shortest path
+export function chooseDoorIndices (start: string, end: string, map: Map <string, number []> ){
+    // Input: start room number (string), end room number (string), map of associations (map: key= string, value = array)
+    if (map === undefined) throw new Error("Map is empty")
+    if (!(map.has(start) && map.has(end))) throw new Error("Invalid start and end")
+    // get all possible door indices for the start room number and end room number
+    const startDoorIndices = map.get(start);
+    const endDoorIndices = map.get(end);
+    if (startDoorIndices === undefined || endDoorIndices === undefined) {
+        throw new Error("Start or end door indices array are undefined");
+    }    
+    // If the value (which is an array) is of size 1, then just return their corresponding door indices. 
+    if (startDoorIndices.length === 1 && endDoorIndices.length === 1) {
+        return { start: startDoorIndices[0], end: endDoorIndices[0] };
+    }
+    // Else somehow find all possible combinations of start and end indices. 
+    // HOW: loop through every element in startDoorIndices, and loop through every element in endDoorIndices, 
+    // combine them in an array and add it to a new list
+    
+    // Convert indices to x and y coordinates, find distance between the coordinates, somehow store those values, and return the minimum distanced indices 
+    // for every element in the new list, index 0 of the array is the startdoorIndex, and index 1 is the endDoorIndex
+    // take those indices out, convert them to x and y coordinates and calculate the distance between them.
+    // set it as the shortest distance, and compare to all other calculated distances 
+    
+    
 }
 
 
