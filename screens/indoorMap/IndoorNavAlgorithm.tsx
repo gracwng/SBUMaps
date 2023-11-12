@@ -169,9 +169,10 @@ export function generatePath (pathIndices: number [], cols: number, tileSize: nu
 }
 
 // ChooseDoorIndices method: when the user enters their desired room numbers (which will be from the fixed list we created), 
-    // we will send those room numbers to a function that will determine the door indices that will give them the shortest path
-export function chooseDoorIndices (start: string, end: string, map: Map <string, number []> ){
-    // Input: start room number (string), end room number (string), map of associations (map: key= string, value = array)
+    // we will send those room numbers to a function that will determine the door indices that will give them the shortest path.
+    // function below returns start and end index for the bfs algorithm
+export function chooseDoorIndices (start: string, end: string, map: Map <string, number []> , cols: number){
+    // Input: start room number (string), end room number (string), map of associations (map: key= string, value = array), number of columns (number)
     if (map === undefined) throw new Error("Map is empty")
     if (!(map.has(start) && map.has(end))) throw new Error("Invalid start and end")
     // get all possible door indices for the start room number and end room number
@@ -184,17 +185,53 @@ export function chooseDoorIndices (start: string, end: string, map: Map <string,
     if (startDoorIndices.length === 1 && endDoorIndices.length === 1) {
         return { start: startDoorIndices[0], end: endDoorIndices[0] };
     }
-    // Else somehow find all possible combinations of start and end indices. 
+    // Else find all possible combinations of start and end indices. 
     // HOW: loop through every element in startDoorIndices, and loop through every element in endDoorIndices, 
     // combine them in an array and add it to a new list
-    
+    const allCombinations: { start: number; end: number }[] = [];
+
+    for (const startIndex of startDoorIndices) {
+        for (const endIndex of endDoorIndices) {
+        allCombinations.push({ start: startIndex, end: endIndex });
+        }
+    }
+    // Calculate distances for each combination and find the minimum distance
+    let minDistance = Number.MAX_VALUE;
+    let minDistanceIndices: { start: number; end: number } = { start: 0, end: 0 };
+
+    for (const combination of allCombinations) {
+        const startCoordinates = getCoordinates(combination.start, cols);
+        const endCoordinates = getCoordinates(combination.end, cols);
+
+        const distance = calculateDistance(startCoordinates, endCoordinates);
+
+        if (distance < minDistance) {
+        minDistance = distance;
+        minDistanceIndices = combination;
+        }
+    }
+
+    return minDistanceIndices;
+    }
     // Convert indices to x and y coordinates, find distance between the coordinates, somehow store those values, and return the minimum distanced indices 
     // for every element in the new list, index 0 of the array is the startdoorIndex, and index 1 is the endDoorIndex
     // take those indices out, convert them to x and y coordinates and calculate the distance between them.
     // set it as the shortest distance, and compare to all other calculated distances 
+    // Helper function to convert indices to x and y coordinates
+function getCoordinates(index: number, cols: number): { x: number; y: number } {
+    const x = index % (cols+1);
+    const y = Math.floor(index / (cols+1));
+    return { x, y };
+  }
+  
+  // Helper function to calculate Euclidean distance between two points
+  function calculateDistance(point1: { x: number; y: number }, point2: { x: number; y: number }): number {
+    const deltaX = point2.x - point1.x;
+    const deltaY = point2.y - point1.y;
+    return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+  }
     
-    
-}
+
 
 
 

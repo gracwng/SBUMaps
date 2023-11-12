@@ -1,5 +1,3 @@
-import { createErrorHandler } from "expo/build/errors/ExpoErrorManager";
-
 export const buildings = {
     freyHall: {
         floor1: {
