@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import {buildings} from './screens/indoorMap/mapRecords';
 import Svg, {Path, Image } from 'react-native-svg';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { bfs, makeAdjLst, generatePath } from './screens/indoorMap/IndoorNavAlgorithm';
 
 export default function App() {
@@ -30,32 +30,30 @@ export default function App() {
       <View style = {styles.header}>
         <Text>Frey Hall Floor 2</Text>
       </View>
-
-
        {/* <View style = {{width: 2000, height: 500}}> */}
-       {/* <View style={{ transform: [{ scale: 0.3 }] }}> */}
        <View style={{ transform: [{ scale: 0.3 }] }}>
        {/* <Svg height="576" width="1376"  */}
         <Svg height="992" width="1376" 
-        style={{ backgroundColor: '#FDF5E6' }} // Set the background color to blue
+        style={{ backgroundColor: '#FFFAF0' }} 
          >
        <Image
-          width="100%" // Makes the image larger than the parent SVG container
+          width="100%" 
           height="100%"
           // "xMidYMid meet": The element is scaled to fit within the container while maintaining its aspect ratio. It is centered both horizontally and vertically within the container.
           preserveAspectRatio="xMidYMid meet"
           // href={require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor2.png')} />
           href={require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor1.png')} />
       <Path
-      // d = "M112 240 L112 272 L144 272 L176 272 L208 272 L240 272 L272 272 L304 272 L336 272 L368 272 L400 272 L432 272 L464 272 L496 272 L528 272 L560 272 L592 272 L624 272 L656 272 L688 272 L720 272 L752 272 L784 272 L816 272 L848 272 L880 272 L912 272 L944 272 L976 272 L1008 272 L1040 272 L1072 272 L1072 336"
       d = {path}
       fill="none"
       stroke="blue"
       strokeWidth="5"
     />
   </Svg>
-  <Button title = "BUTton" 
-  onPress={makePath}/>
+  <TouchableOpacity style = {styles.button} onPress = {makePath}>
+    <Text style = {styles.buttonText}> Button</Text>
+  </TouchableOpacity>
+  
   {/* //put in input tag
   <TextInput> 
     
@@ -85,6 +83,19 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: '100%', // Set the image width to 100% of the parent View
     height: '100%', // Set the image height to 100% of the parent View 
+  },
+  //can't really be used on the button component
+  button: {
+    backgroundColor: '#5F9EA0',
+    color: 'white',
+    padding: 20,
+    borderRadius: 10,
+    margin: 10,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 50,
+    textAlign: 'center'
   }
 }
 );
