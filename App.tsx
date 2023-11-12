@@ -9,12 +9,13 @@ export default function App() {
   // let indoorTileMap = Buildings.freyHall.freyFloor2;
   // let mappedTiles = indoorTileMap.map((tile, index))
   const [path, setPath] = useState("");
-  const [start, setStart] = useState(304);
-  const[end, setEnd] = useState(420);
-
+  // const [start, setStart] = useState(304);
+  // const[end, setEnd] = useState(420);
+  const [start, setStart] = useState(348);
+  const[end, setEnd] = useState(761);
 
   const makePath = () => {
-    let freyFloor2 = buildings.freyHall.floor2
+    let freyFloor2 = buildings.freyHall.floor1
     let adjList = makeAdjLst(freyFloor2.array, freyFloor2.rows, freyFloor2.cols)
     // console.log(adjList)
     let bfsResult = bfs(adjList.adjLst, start, end, new Set<number>(), adjList.hallwayTileIndices)
@@ -32,17 +33,19 @@ export default function App() {
 
 
        {/* <View style = {{width: 2000, height: 500}}> */}
+       {/* <View style={{ transform: [{ scale: 0.3 }] }}> */}
        <View style={{ transform: [{ scale: 0.3 }] }}>
-
-        <Svg height="576" width="1376" 
-         style={{ backgroundColor: '#FDF5E6' }} // Set the background color to blue
+       {/* <Svg height="576" width="1376"  */}
+        <Svg height="992" width="1376" 
+        style={{ backgroundColor: '#FDF5E6' }} // Set the background color to blue
          >
        <Image
           width="100%" // Makes the image larger than the parent SVG container
           height="100%"
           // "xMidYMid meet": The element is scaled to fit within the container while maintaining its aspect ratio. It is centered both horizontally and vertically within the container.
           preserveAspectRatio="xMidYMid meet"
-          href={require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor2.png')} />
+          // href={require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor2.png')} />
+          href={require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor1.png')} />
       <Path
       // d = "M112 240 L112 272 L144 272 L176 272 L208 272 L240 272 L272 272 L304 272 L336 272 L368 272 L400 272 L432 272 L464 272 L496 272 L528 272 L560 272 L592 272 L624 272 L656 272 L688 272 L720 272 L752 272 L784 272 L816 272 L848 272 L880 272 L912 272 L944 272 L976 272 L1008 272 L1040 272 L1072 272 L1072 336"
       d = {path}

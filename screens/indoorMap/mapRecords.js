@@ -36,6 +36,9 @@ export const buildings = {
            rows: 30,
            cols: 42,
            tileSize: 32
+        //    roomNumDoorAssociation: new Map([
+        //     "105", []
+        //    ])
            },
            floor2: {
                array: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

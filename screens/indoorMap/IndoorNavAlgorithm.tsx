@@ -37,6 +37,7 @@ export function makeAdjLst (map: number[], rows: number, cols: number) {
             tileNumber === Tiles.OpenRightDoor ||
             tileNumber === Tiles.OpenLeftDoor
           ) {
+            // adjObject are the neighbors of the current node
             const adjObject = checkNeighbors(index, map, rows, cols);
             adjLst.set(index, adjObject);
             if (tileNumber != Tiles.HallwayTile)
@@ -142,7 +143,9 @@ export function generatePath (pathIndices: number [], cols: number, tileSize: nu
         s += " L"
         let colX = ((index % (cols + 1)) * tileSize) + tileSize/2
         // I'm attaching "+ tileSize/2" because the path/line we draw has to appear in the middle of the hallwaytile
-        let rowY = (Math.floor(index/cols) * tileSize) + tileSize/2
+        // let rowY = (Math.floor(index/cols) * tileSize) + tileSize/2
+        let rowY = (Math.floor(index/(cols+1)) * tileSize) + tileSize/2
+
         s += colX + " " + rowY
     }
     // Extract the rest of the string starting from the third character and concatenate the new characters.
