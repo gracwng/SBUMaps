@@ -35,10 +35,17 @@ export const buildings = {
         //    starting from 0
            rows: 30,
            cols: 42,
-           tileSize: 32
-        //    roomNumDoorAssociation: new Map([
-        //     "105", []
-        //    ])
+           tileSize: 32,
+           roomNumDoorAssociation: new Map(
+            ["105", [348, 354]],
+            ["109"] [],
+            ["112"],
+            ["118"],
+            ["119"],
+            ["100"],
+            ["102"],
+            ["144"]
+            )
            },
            floor2: {
                array: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
