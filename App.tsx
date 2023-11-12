@@ -1,14 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import {buildings} from './screens/indoorMap/mapRecords';
 import Svg, {Path, Image } from 'react-native-svg';
-
+import { useState } from 'react';
+import { bfs, makeAdjLst, generatePath } from './screens/indoorMap/IndoorNavAlgorithm';
 
 export default function App() {
   // let indoorTileMap = Buildings.freyHall.freyFloor2;
   // let mappedTiles = indoorTileMap.map((tile, index))
+  const [path, setPath] = useState("");
+  const [start, setStart] = useState(304);
+  const[end, setEnd] = useState(420);
 
 
+  const makePath = () => {
+    let freyFloor2 = buildings.freyHall.floor2
+    let adjList = makeAdjLst(freyFloor2.array, freyFloor2.rows, freyFloor2.cols)
+    // console.log(adjList)
+    let bfsResult = bfs(adjList.adjLst, start, end, new Set<number>(), adjList.hallwayTileIndices)
+    // console.log(bfsResult)
+    //32 = size of tile
+    const stringPath = generatePath(bfsResult, freyFloor2.cols, freyFloor2.tileSize);
+    setPath(stringPath)
+  }
 
   return (
     <View style={styles.container}>
@@ -30,13 +44,20 @@ export default function App() {
           preserveAspectRatio="xMidYMid meet"
           href={require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor2.png')} />
       <Path
-      d = "M112 240 L112 272 L144 272 L176 272 L208 272 L240 272 L272 272 L304 272 L336 272 L368 272 L400 272 L432 272 L464 272 L496 272 L528 272 L560 272 L592 272 L624 272 L656 272 L688 272 L720 272 L752 272 L784 272 L816 272 L848 272 L880 272 L912 272 L944 272 L976 272 L1008 272 L1040 272 L1072 272 L1072 336"
+      // d = "M112 240 L112 272 L144 272 L176 272 L208 272 L240 272 L272 272 L304 272 L336 272 L368 272 L400 272 L432 272 L464 272 L496 272 L528 272 L560 272 L592 272 L624 272 L656 272 L688 272 L720 272 L752 272 L784 272 L816 272 L848 272 L880 272 L912 272 L944 272 L976 272 L1008 272 L1040 272 L1072 272 L1072 336"
+      d = {path}
       fill="none"
       stroke="blue"
       strokeWidth="5"
     />
   </Svg>
-  </View>
+  <Button title = "BUTton" 
+  onPress={makePath}/>
+  {/* //put in input tag
+  <TextInput> 
+    
+  </TextInput> */}
+    </View>
     </View>
     
   );
