@@ -25,20 +25,25 @@ export default function App() {
     setPath(stringPath)
   }
   const originalWidth = 1376;
-const originalHeight = 992;
-const aspectRatio = originalWidth / originalHeight;
-const windowWidth = Dimensions.get("window").width;
+  const originalHeight = 992;
+  const aspectRatio = originalWidth / originalHeight;
+  const windowWidth = Dimensions.get("window").width;
 
   return (
     <View style={styles.container}>
       <View style = {styles.header}>
         <Text style = {styles.screenTitle}>Frey Hall Floor 2</Text>
       </View>
+      <View>
+        {/* //put in input tag
+    <TextInput> 
+      
+    </TextInput> */}
+      </View>
       <View style={{ width: windowWidth, aspectRatio }}>
       <Svg height="100%" width="100%" 
         viewBox={`0 0 ${originalWidth} ${originalHeight}`}
-        style={styles.svg} 
-         >
+        style={styles.svg} >
        <Image
           width="100%" 
           height="100%"
@@ -54,17 +59,10 @@ const windowWidth = Dimensions.get("window").width;
     />
   </Svg>
   </View>
-  {/* </G> */}
   <TouchableOpacity style = {styles.button} onPress = {makePath}>
-    <Text style = {styles.buttonText}> Create Path </Text>
+    <Text style = {styles.buttonText}>Create Path</Text>
   </TouchableOpacity>
-
-  {/* //put in input tag
-  <TextInput> 
-    
-  </TextInput> */}
     </View>
-    // </View>
     
   );
 }
@@ -103,13 +101,13 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontSize: 50,
+    fontSize: 15,
     textAlign: 'center',
   },
   screenTitle: {
     textAlign: 'center',
-    fontSize: 50,
-
+    fontSize: 30,
+    fontFamily: 'Georgia'
   },
   group: {
     transform: [{ scale: 0.5 }],
