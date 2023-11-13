@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Button, Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import {buildings} from './screens/indoorMap/mapRecords';
-import Svg, {Path, Image } from 'react-native-svg';
+import Svg, {Path, Image, G } from 'react-native-svg';
 import React, { useState } from 'react';
 import { bfs, makeAdjLst, generatePath } from './screens/indoorMap/IndoorNavAlgorithm';
 
@@ -24,23 +24,33 @@ export default function App() {
     const stringPath = generatePath(bfsResult, freyFloor2.cols, freyFloor2.tileSize);
     setPath(stringPath)
   }
+  const originalWidth = 1376;
+const originalHeight = 992;
+const aspectRatio = originalWidth / originalHeight;
+const windowWidth = Dimensions.get("window").width;
 
   return (
     <View style={styles.container}>
       <View style = {styles.header}>
-        <Text>Frey Hall Floor 2</Text>
+        <Text style = {styles.screenTitle}>Frey Hall Floor 2</Text>
       </View>
-       {/* <View style = {{width: 2000, height: 500}}> */}
-       <View style={{ transform: [{ scale: 0.3 }] }}>
+      <View style={{ width: windowWidth, aspectRatio }}>
+       {/* <View style = {{width: "100%", height: "100%"}}> */}
+       {/* <View style={{ transform: [{ scale: 0.3 }] }}> */}
        {/* <Svg height="576" width="1376"  */}
-        <Svg height="992" width="1376" 
-        style={{ backgroundColor: '#FFFAF0' }} 
+       {/* <G style = {styles.group}> */}
+       {/* <View style={{ width: "100%", height: "100%" }}> */}
+      {/* height = originalheihg/ 0.3 (0.3 is the scaling number) */}
+      <Svg height="100%" width="100%" 
+        // viewBox={`0 0 100 100`}
+        viewBox={`0 0 ${originalWidth} ${originalHeight}`}
+        style={styles.svg} 
          >
        <Image
           width="100%" 
           height="100%"
           // "xMidYMid meet": The element is scaled to fit within the container while maintaining its aspect ratio. It is centered both horizontally and vertically within the container.
-          preserveAspectRatio="xMidYMid meet"
+          preserveAspectRatio="xMidYMid slice"
           // href={require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor2.png')} />
           href={require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor1.png')} />
       <Path
@@ -50,16 +60,18 @@ export default function App() {
       strokeWidth="5"
     />
   </Svg>
+  </View>
+  {/* </G> */}
   <TouchableOpacity style = {styles.button} onPress = {makePath}>
-    <Text style = {styles.buttonText}> Button</Text>
+    <Text style = {styles.buttonText}> Create Path </Text>
   </TouchableOpacity>
-  
+
   {/* //put in input tag
   <TextInput> 
     
   </TextInput> */}
     </View>
-    </View>
+    // </View>
     
   );
 }
@@ -74,15 +86,19 @@ const styles = StyleSheet.create({
   },
   header: {
     // how can I change the padding of the heading without changing the posiiton of the image
-    paddingTop: 100
+    // paddingTop: 10,
+
 
   },
-  image: {
+  svg: {
     flex: 1, // Take up the available space within the View
     alignSelf: 'center',
     resizeMode: 'contain',
     width: '100%', // Set the image width to 100% of the parent View
     height: '100%', // Set the image height to 100% of the parent View 
+    backgroundColor: '#FFFAF0',
+    // viewBox: '0 0 412.8 297.6'
+
   },
   //can't really be used on the button component
   button: {
@@ -95,7 +111,18 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 50,
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+  screenTitle: {
+    textAlign: 'center',
+    fontSize: 50,
+
+  },
+  group: {
+    transform: [{ scale: 0.5 }],
+    alignSelf: 'center',
+    flex: 1, // Take up the available space within the View
+
   }
 }
 );
