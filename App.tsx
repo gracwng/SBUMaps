@@ -35,14 +35,7 @@ const windowWidth = Dimensions.get("window").width;
         <Text style = {styles.screenTitle}>Frey Hall Floor 2</Text>
       </View>
       <View style={{ width: windowWidth, aspectRatio }}>
-       {/* <View style = {{width: "100%", height: "100%"}}> */}
-       {/* <View style={{ transform: [{ scale: 0.3 }] }}> */}
-       {/* <Svg height="576" width="1376"  */}
-       {/* <G style = {styles.group}> */}
-       {/* <View style={{ width: "100%", height: "100%" }}> */}
-      {/* height = originalheihg/ 0.3 (0.3 is the scaling number) */}
       <Svg height="100%" width="100%" 
-        // viewBox={`0 0 100 100`}
         viewBox={`0 0 ${originalWidth} ${originalHeight}`}
         style={styles.svg} 
          >
