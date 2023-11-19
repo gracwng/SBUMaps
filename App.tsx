@@ -4,67 +4,14 @@ import {buildings} from './screens/indoorMap/mapRecords';
 import Svg, {Path, Image, G } from 'react-native-svg';
 import React, { useState } from 'react';
 import { bfs, makeAdjLst, generatePath } from './screens/indoorMap/IndoorNavAlgorithm';
+import { IndoorNav } from './screens/indoorMap/IndoorNav';
 
 export default function App() {
-  // let indoorTileMap = Buildings.freyHall.freyFloor2;
-  // let mappedTiles = indoorTileMap.map((tile, index))
-  const [path, setPath] = useState("");
-  // const [start, setStart] = useState(304);
-  // const[end, setEnd] = useState(420);
-  const [start, setStart] = useState(348);
-  const[end, setEnd] = useState(761);
+  
 
-  const makePath = () => {
-    let freyFloor2 = buildings.freyHall.floor1
-    let adjList = makeAdjLst(freyFloor2.array, freyFloor2.rows, freyFloor2.cols)
-    // console.log(adjList)
-    let bfsResult = bfs(adjList.adjLst, start, end, new Set<number>(), adjList.hallwayTileIndices)
-    // console.log(bfsResult)
-    //32 = size of tile
-    const stringPath = generatePath(bfsResult, freyFloor2.cols, freyFloor2.tileSize);
-    setPath(stringPath)
-  }
-  const originalWidth = 1376;
-  const originalHeight = 992;
-  const aspectRatio = originalWidth / originalHeight;
-  const windowWidth = Dimensions.get("window").width;
-
-  return (
-    <View style={styles.container}>
-      <View style = {styles.header}>
-        <Text style = {styles.screenTitle}>Frey Hall Floor 2</Text>
-      </View>
-      <View>
-        {/* //put in input tag
-    <TextInput> 
-      
-    </TextInput> */}
-      </View>
-      <View style={{ width: windowWidth, aspectRatio }}>
-      <Svg height="100%" width="100%" 
-        viewBox={`0 0 ${originalWidth} ${originalHeight}`}
-        style={styles.svg} >
-       <Image
-          width="100%" 
-          height="100%"
-          // "xMidYMid meet": The element is scaled to fit within the container while maintaining its aspect ratio. It is centered both horizontally and vertically within the container.
-          preserveAspectRatio="xMidYMid slice"
-          // href={require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor2.png')} />
-          href={require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor1.png')} />
-      <Path
-      d = {path}
-      fill="none"
-      stroke="blue"
-      strokeWidth="5"
-    />
-  </Svg>
-  </View>
-  <TouchableOpacity style = {styles.button} onPress = {makePath}>
-    <Text style = {styles.buttonText}>Create Path</Text>
-  </TouchableOpacity>
-    </View>
-    
-  );
+ return(
+    <IndoorNav/>
+ );
 }
 
 
@@ -109,11 +56,5 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontFamily: 'Georgia'
   },
-  group: {
-    transform: [{ scale: 0.5 }],
-    alignSelf: 'center',
-    flex: 1, // Take up the available space within the View
-
-  }
 }
 );
