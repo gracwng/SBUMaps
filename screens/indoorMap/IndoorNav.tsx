@@ -4,14 +4,18 @@ import {buildings} from './mapRecords';
 import Svg, {Path, Image, G } from 'react-native-svg';
 import React, { useState } from 'react';
 import { bfs, makeAdjLst, generatePath } from './IndoorNavAlgorithm';
+import { SearchBar } from '@rneui/base';
 
 
 export const IndoorNav = () => {
   const [path, setPath] = useState("");
-  // const [start, setStart] = useState(304);
-  // const[end, setEnd] = useState(420);
   const [start, setStart] = useState(348);
   const[end, setEnd] = useState(761);
+
+  const originalWidth = 1376;
+  const originalHeight = 992;
+  const aspectRatio = originalWidth / originalHeight;
+  const windowWidth = Dimensions.get("window").width;
 
   const makePath = () => {
     let freyFloor2 = buildings.freyHall.floor1
@@ -22,10 +26,7 @@ export const IndoorNav = () => {
     const stringPath = generatePath(bfsResult, freyFloor2.cols, freyFloor2.tileSize);
     setPath(stringPath)
   }
-  const originalWidth = 1376;
-  const originalHeight = 992;
-  const aspectRatio = originalWidth / originalHeight;
-  const windowWidth = Dimensions.get("window").width;
+  
 
   return (
     <View style={styles.container}>
@@ -34,11 +35,19 @@ export const IndoorNav = () => {
       </View>
       <View>
         <Text></Text>
+        <SearchBar
+        placeholder= "starting room"
+        lightTheme = {true}
+        round = {true}
+        containerStyle = {{backgroundColor: "beige"}}
+        />
         {/* //put in input tag
     <TextInput> 
       
     </TextInput> */}
       </View>
+
+    {/* map component: */}
       <View style={{ width: windowWidth, aspectRatio }}>
       <Svg height="100%" width="100%" 
         viewBox={`0 0 ${originalWidth} ${originalHeight}`}
@@ -48,17 +57,18 @@ export const IndoorNav = () => {
           height="100%"
           // "xMidYMid meet": The element is scaled to fit within the container while maintaining its aspect ratio. It is centered both horizontally and vertically within the container.
           preserveAspectRatio="xMidYMid slice"
-          // href={require('../SBUMapsTS/assets/indoorMaps/FreyHall/FreyFloor2.png')} />
-href={require('../../assets/indoorMaps/FreyHall/FreyFloor1.png')} />
+          href={require('../../assets/indoorMaps/FreyHall/FreyFloor1.png')} 
+        />
           
       <Path
       d = {path}
       fill="none"
       stroke="blue"
       strokeWidth="5"
-    />
-  </Svg>
-  </View>
+        />
+    </Svg>
+    </View>
+  {/* button component */}
   <TouchableOpacity style = {styles.button} onPress = {makePath}>
     <Text style = {styles.buttonText}>Create Path</Text>
   </TouchableOpacity>
