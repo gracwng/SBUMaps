@@ -45,13 +45,7 @@ export const IndoorNav = () => {
       </View>
       <View>
         <Text></Text>
-        <SearchBar
-        placeholder = "Starting room..."
-        // onChangeText={}
-        lightTheme = {true}
-        round = {true}
-        containerStyle = {{backgroundColor: "beige" }}
-        />
+        {/* insert search bar here  */}
         {/* //put in input tag
     <TextInput> 
       
@@ -70,7 +64,7 @@ export const IndoorNav = () => {
         //  onZoomAfter={this.logOutZoomState}
         style={{
             padding: 10,
-            backgroundColor: 'red',
+            backgroundColor: '#D3D3D3',
         }}
       >
       <Svg height="100%" width="100%" 
