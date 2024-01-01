@@ -5,6 +5,7 @@ import Svg, {Path, Image, G } from 'react-native-svg';
 import React, { useState } from 'react';
 import { bfs, makeAdjLst, generatePath } from './IndoorNavAlgorithm';
 import { SearchBar } from '@rneui/base';
+import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view'; 
 
 export const DissmissKeyboard = ({children}: {children: React.ReactNode}) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -58,7 +59,20 @@ export const IndoorNav = () => {
       </View>
 
     {/* map component: */}
+    
       <View style={{ width: windowWidth, aspectRatio }}>
+      <ReactNativeZoomableView
+        maxZoom={1.5}
+        minZoom={0.5}
+        zoomStep={0.5}
+        initialZoom={1}
+        bindToBorders={true}
+        //  onZoomAfter={this.logOutZoomState}
+        style={{
+            padding: 10,
+            backgroundColor: 'red',
+        }}
+      >
       <Svg height="100%" width="100%" 
         viewBox={`0 0 ${originalWidth} ${originalHeight}`}
         style={styles.svg} >
@@ -77,6 +91,7 @@ export const IndoorNav = () => {
       strokeWidth="5"
       />
     </Svg>
+    </ReactNativeZoomableView>
     </View>
   {/* button component */}
   <TouchableOpacity style = {styles.button} onPress = {makePath}>
