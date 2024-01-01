@@ -46,6 +46,7 @@ export const IndoorNav = () => {
       <View>
         <Text></Text>
         {/* insert search bar here  */}
+        {/* we searching by roomNumDoorAssociation in map records */}
         {/* //put in input tag
     <TextInput> 
       
