@@ -6,6 +6,9 @@ import React, { useState } from 'react';
 import { bfs, makeAdjLst, generatePath } from './IndoorNavAlgorithm';
 import { SearchBar } from '@rneui/base';
 import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view'; 
+import * as Icon from "react-native-feather";
+
+
 
 export const DissmissKeyboard = ({children}: {children: React.ReactNode}) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -47,6 +50,8 @@ export const IndoorNav = () => {
         <Text></Text>
         {/* insert search bar here  */}
         {/* we searching by roomNumDoorAssociation in map records */}
+        <Icon.Search stroke = "black" strokeWidth="2" />
+
         {/* //put in input tag
     <TextInput> 
       
