@@ -50,8 +50,12 @@ export const IndoorNav = () => {
         <Text></Text>
         {/* insert search bar here  */}
         {/* we searching by roomNumDoorAssociation in map records */}
-        <Icon.Search stroke = "black" strokeWidth="2" />
 
+        <View style = {{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8EBE2', padding: 10, borderRadius: 20, width: 250}}>
+          <Icon.Search stroke = "black" strokeWidth= "4" width = "24" height = "24" style = {{ marginLeft: 1, marginRight: 4}}/>
+          <TextInput placeholder='Search' style = {{fontSize: 15, }}/>
+        </View>
+        
         {/* //put in input tag
     <TextInput> 
       
