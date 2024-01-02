@@ -1,24 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import {buildings} from './mapRecords';
-import Svg, {Path, Image, G } from 'react-native-svg';
+import { buildings } from './mapRecords';
+import Svg, { Path, Image, G } from 'react-native-svg';
 import React, { useState } from 'react';
 import { bfs, makeAdjLst, generatePath } from './IndoorNavAlgorithm';
 import { SearchBar } from '@rneui/base';
-import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view'; 
+import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view';
 import * as Icon from "react-native-feather";
 
 
-
-export const DissmissKeyboard = ({children}: {children: React.ReactNode}) => (
+export const DissmissKeyboard = ({ children }: { children: React.ReactNode }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     {children}
   </TouchableWithoutFeedback>
 )
+
+
 export const IndoorNav = () => {
-  const [path, setPath] = useState("");
-  const [start, setStart] = useState(348);
-  const[end, setEnd] = useState(761);
+  const [path, setPath] = useState('');
+  const [start, setStart] = useState<number>(348);
+  const [end, setEnd] = useState(761);
 
   const originalWidth = 1376;
   const originalHeight = 992;
@@ -35,79 +36,81 @@ export const IndoorNav = () => {
     setPath(stringPath)
   }
 
+
+
   //handle the case when the starting door doesn't start with a number like Physics B-109
-//   const updateStart = (newStart: ) => {
-//     setStart(newStart)
-//   }
-  
+  //   const updateStart = (newStart: ) => {
+  //     setStart(newStart)
+  //   }
+
 
   return (
     <View style={styles.container}>
-      <View style = {styles.header}>
-        <Text style = {styles.screenTitle}> Frey Hall Floor 2 </Text>
+      <View style={styles.header}>
+        <Text style={styles.screenTitle}> Frey Hall Floor 2 </Text>
       </View>
       <View>
         <Text></Text>
         {/* insert search bar here  */}
         {/* we searching by roomNumDoorAssociation in map records */}
 
-        <View style = {{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8EBE2', padding: 10, borderRadius: 20, width: 250}}>
-          <Icon.Search stroke = "black" strokeWidth= "4" width = "24" height = "24" style = {{ marginLeft: 1, marginRight: 4}}/>
-          <TextInput placeholder='Search' style = {{fontSize: 15, }}/>
+        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8EBE2', padding: 10, borderRadius: 17, width: 250 }}>
+          <Icon.Search stroke="black" strokeWidth="4" width="24" height="24" style={{ marginLeft: 1, marginRight: 4 }} />
+          <TextInput value={start} onChangeText={(text) => setStart(Number(text))} placeholder='Search' style={{ fontSize: 15 }} />
         </View>
-        
+
         {/* //put in input tag
     <TextInput> 
       
     </TextInput> */}
       </View>
 
-    {/* map component: */}
-    
+      {/* map component: */}
+
       <View style={{ width: windowWidth, aspectRatio }}>
-      <ReactNativeZoomableView
-        maxZoom={1.5}
-        minZoom={0.5}
-        zoomStep={0.5}
-        initialZoom={1}
-        bindToBorders={true}
-        //  onZoomAfter={this.logOutZoomState}
-        style={{
+        <ReactNativeZoomableView
+          maxZoom={1.5}
+          minZoom={0.5}
+          zoomStep={0.5}
+          initialZoom={1}
+          bindToBorders={true}
+          //  onZoomAfter={this.logOutZoomState}
+          style={{
             padding: 10,
             backgroundColor: '#D3D3D3',
-        }}
-      >
-      <Svg height="100%" width="100%" 
-        viewBox={`0 0 ${originalWidth} ${originalHeight}`}
-        style={styles.svg} >
-       <Image
-          width="100%" 
-          height="100%"
-          // "xMidYMid meet": The element is scaled to fit within the container while maintaining its aspect ratio. It is centered both horizontally and vertically within the container.
-          preserveAspectRatio="xMidYMid slice"
-          href={require('../../assets/indoorMaps/FreyHall/FreyFloor1.png')} 
-        />
-          
-      <Path
-      d = {path}
-      fill="none"
-      stroke="blue"
-      strokeWidth="5"
-      />
-    </Svg>
-    </ReactNativeZoomableView>
+          }}
+        >
+          <Svg height="100%" width="100%"
+            viewBox={`0 0 ${originalWidth} ${originalHeight}`}
+            style={styles.svg} >
+            <Image
+              width="100%"
+              height="100%"
+              // "xMidYMid meet": The element is scaled to fit within the container while maintaining its aspect ratio. It is centered both horizontally and vertically within the container.
+              preserveAspectRatio="xMidYMid slice"
+              href={require('../../assets/indoorMaps/FreyHall/FreyFloor1.png')}
+            />
+
+            <Path
+              d={path}
+              fill="none"
+              stroke="blue"
+              strokeWidth="5"
+            />
+          </Svg>
+        </ReactNativeZoomableView>
+      </View>
+      {/* button component */}
+      <TouchableOpacity style={styles.button} onPress={makePath}>
+        <Text style={styles.buttonText}>Create Path</Text>
+      </TouchableOpacity>
     </View>
-  {/* button component */}
-  <TouchableOpacity style = {styles.button} onPress = {makePath}>
-    <Text style = {styles.buttonText}>Create Path</Text>
-  </TouchableOpacity>
-    </View>
-    
+
   );
 
 }
 
-  
+
 
 const styles = StyleSheet.create({
   container: {
