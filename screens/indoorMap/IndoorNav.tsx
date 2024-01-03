@@ -7,6 +7,8 @@ import { bfs, makeAdjLst, generatePath } from './IndoorNavAlgorithm';
 import { SearchBar } from '@rneui/base';
 import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view';
 import * as Icon from "react-native-feather";
+import SearchFilter from '../../components/SearchFilter';
+import SearchFilterStart from '../../components/SearchFilter';
 
 
 export const DissmissKeyboard = ({ children }: { children: React.ReactNode }) => (
@@ -58,6 +60,8 @@ export const IndoorNav = () => {
           <Icon.Search stroke="black" strokeWidth="4" width="24" height="24" style={{ marginLeft: 1, marginRight: 4 }} />
           <TextInput value={start} onChangeText={(text) => setStart(Number(text))} placeholder='Search' style={{ fontSize: 15 }} />
         </View>
+
+        <SearchFilterStart data = {buildings.freyHall.roomNumDoorAssociation} input = {start} setInput = {setStart}/>
 
         {/* //put in input tag
     <TextInput> 
