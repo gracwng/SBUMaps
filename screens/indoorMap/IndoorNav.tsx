@@ -20,7 +20,7 @@ export const DissmissKeyboard = ({ children }: { children: React.ReactNode }) =>
 
 export const IndoorNav = () => {
   const [path, setPath] = useState('');
-  const [start, setStart] = useState<number>(348);
+  const [start, setStart] = useState('');
   const [end, setEnd] = useState(761);
 
   const originalWidth = 1376;
@@ -32,7 +32,7 @@ export const IndoorNav = () => {
     let freyFloor2 = buildings.freyHall.floor1
     let adjList = makeAdjLst(freyFloor2.array, freyFloor2.rows, freyFloor2.cols)
     // console.log(adjList)
-    let bfsResult = bfs(adjList.adjLst, start, end, new Set<number>(), adjList.hallwayTileIndices)
+    let bfsResult = bfs(adjList.adjLst, Number(start), end, new Set<number>(), adjList.hallwayTileIndices)
     // console.log(bfsResult)
     const stringPath = generatePath(bfsResult, freyFloor2.cols, freyFloor2.tileSize);
     setPath(stringPath)
@@ -58,10 +58,19 @@ export const IndoorNav = () => {
 
         <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8EBE2', padding: 10, borderRadius: 17, width: 250 }}>
           <Icon.Search stroke="black" strokeWidth="4" width="24" height="24" style={{ marginLeft: 1, marginRight: 4 }} />
-          <TextInput value={start} onChangeText={(text) => setStart(Number(text))} placeholder='Search' style={{ fontSize: 15 }} />
+          <TextInput
+            value={start}
+            onChangeText={(text) => setStart(text)}
+            keyboardType='numeric'  // Use keyboardType for numeric input
+            returnKeyType='search'  // Specify the return key type
+            placeholder='Search'
+            style={{ fontSize: 15 }}
+            onSubmitEditing={() => Keyboard.dismiss()}
+          />
+          {/* <TextInput value={start} onChangeText={(text) => setStart(text)} keyboardType='numeric' placeholder='Search' style={{ fontSize: 15 }} onSubmitEditing={() => Keyboard.dismiss()} /> */}
         </View>
 
-        <SearchFilterStart data = {buildings.freyHall.roomNumDoorAssociation} input = {start} setInput = {setStart}/>
+        <SearchFilterStart data={buildings.freyHall.roomNumDoorAssociation} input={start} setInput={setStart} />
 
         {/* //put in input tag
     <TextInput> 
@@ -105,9 +114,12 @@ export const IndoorNav = () => {
         </ReactNativeZoomableView>
       </View>
       {/* button component */}
+      {/* condiitonal rendering for the button */}
+      {start !== '' && end !== '' && (
       <TouchableOpacity style={styles.button} onPress={makePath}>
         <Text style={styles.buttonText}>Create Path</Text>
       </TouchableOpacity>
+      )}
     </View>
 
   );

@@ -102,9 +102,9 @@ export function checkNeighbors (index: number, map: number[], rows: number, cols
 }
 
 export function bfs (adjLst: Map <number, Set<number>>, start: number, target: number, isVisited: Set <number>, hallwayTileIndices: Set<number>): number[]{
-    if (!adjLst || !start || !target || !isVisited || !hallwayTileIndices) {
+    if (!(adjLst instanceof Map) || typeof start !== 'number' || typeof target !== 'number' || !(isVisited instanceof Set) || !(hallwayTileIndices instanceof Set)) {
         throw new Error('Invalid parameters. Please provide valid arguments.');
-      }
+      }      
     // in js and ts, sets/arrays/objects are passed by reference so the underlying object is referred to by the same memory address. that's why I am creating a new set and setting it to isVisited
     isVisited = new Set(hallwayTileIndices)
     isVisited.delete(start)
