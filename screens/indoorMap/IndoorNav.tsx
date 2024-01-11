@@ -20,8 +20,10 @@ export const DissmissKeyboard = ({ children }: { children: React.ReactNode }) =>
 
 export const IndoorNav = () => {
   const [path, setPath] = useState('');
+
   const [start, setStart] = useState('');
-  const [end, setEnd] = useState(761);
+  const [end, setEnd] = useState('');
+  // start: 348, end: 761
 
   const originalWidth = 1376;
   const originalHeight = 992;
@@ -32,7 +34,7 @@ export const IndoorNav = () => {
     let freyFloor2 = buildings.freyHall.floor1
     let adjList = makeAdjLst(freyFloor2.array, freyFloor2.rows, freyFloor2.cols)
     // console.log(adjList)
-    let bfsResult = bfs(adjList.adjLst, Number(start), end, new Set<number>(), adjList.hallwayTileIndices)
+    let bfsResult = bfs(adjList.adjLst, Number(start), Number(end), new Set<number>(), adjList.hallwayTileIndices)
     // console.log(bfsResult)
     const stringPath = generatePath(bfsResult, freyFloor2.cols, freyFloor2.tileSize);
     setPath(stringPath)
@@ -63,7 +65,7 @@ export const IndoorNav = () => {
             onChangeText={(text) => setStart(text)}
             keyboardType='numeric'  // Use keyboardType for numeric input
             returnKeyType='search'  // Specify the return key type
-            placeholder='Search'
+            placeholder='Starting room/door'
             style={{ fontSize: 15 }}
             onSubmitEditing={() => Keyboard.dismiss()}
           />
@@ -116,9 +118,9 @@ export const IndoorNav = () => {
       {/* button component */}
       {/* condiitonal rendering for the button */}
       {start !== '' && end !== '' && (
-      <TouchableOpacity style={styles.button} onPress={makePath}>
-        <Text style={styles.buttonText}>Create Path</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={makePath}>
+          <Text style={styles.buttonText}>Create Path</Text>
+        </TouchableOpacity>
       )}
     </View>
 
