@@ -71,8 +71,14 @@ export const IndoorNav = () => {
               onSubmitEditing={() => Keyboard.dismiss()}
             />
           </View>
+
           {(start !== '' && (
-          <SearchFilterStart data={buildings.freyHall.roomNumDoorAssociation} input={start} setInput={setStart}/>
+            <SearchFilterStart
+              data={buildings.freyHall.roomNumDoorAssociation}
+              input={start}
+              setInput={setStart}
+
+            />
 
           )
 
