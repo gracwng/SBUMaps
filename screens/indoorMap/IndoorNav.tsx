@@ -57,22 +57,23 @@ export const IndoorNav = () => {
         <Text></Text>
         {/* insert search bar here  */}
         {/* we searching by roomNumDoorAssociation in map records */}
+        <View>
 
-        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8EBE2', padding: 10, borderRadius: 17, width: 250 }}>
-          <Icon.Search stroke="black" strokeWidth="4" width="24" height="24" style={{ marginLeft: 1, marginRight: 4 }} />
-          <TextInput
-            value={start}
-            onChangeText={(text) => setStart(text)}
-            keyboardType='numeric'  // Use keyboardType for numeric input
-            returnKeyType='search'  // Specify the return key type
-            placeholder='Starting room/door'
-            style={{ fontSize: 15 }}
-            onSubmitEditing={() => Keyboard.dismiss()}
-          />
-          {/* <TextInput value={start} onChangeText={(text) => setStart(text)} keyboardType='numeric' placeholder='Search' style={{ fontSize: 15 }} onSubmitEditing={() => Keyboard.dismiss()} /> */}
+          <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8EBE2', padding: 10, borderRadius: 17, width: 250 }}>
+            <Icon.Search stroke="black" strokeWidth="4" width="24" height="24" style={{ marginLeft: 1, marginRight: 4 }} />
+            <TextInput
+              value={start}
+              onChangeText={(text) => setStart(text)}
+              keyboardType='numeric'  // Use keyboardType for numeric input
+              returnKeyType='search'  // Specify the return key type
+              placeholder='Starting room/door'
+              style={{ fontSize: 15 }}
+              onSubmitEditing={() => Keyboard.dismiss()}
+            />
+          </View>
+          <SearchFilterStart data={buildings.freyHall.roomNumDoorAssociation} input={start} setInput={setStart}/>
+
         </View>
-
-        <SearchFilterStart data={buildings.freyHall.roomNumDoorAssociation} input={start} setInput={setStart} />
 
         {/* //put in input tag
     <TextInput> 
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
   },
   header: {
     // how can I change the padding of the heading without changing the posiiton of the image
-    // paddingTop: 10,
+    paddingTop: 10,
 
 
   },
