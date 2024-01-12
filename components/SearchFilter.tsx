@@ -16,16 +16,13 @@ const SearchFilterStart = ({ data, input, setInput }: { data: Map<string, number
     if (item.toLowerCase().includes(input.toLowerCase())) {
       return (
         <View style={styles.listItem}>
-          <Text> {item} </Text>
+          <Text> {item.trim()} </Text>
         </View>
       )
     }
     // Default return statement
-    return (
-      <View>
-        <Text> </Text>
-      </View>
-    );
+      return null;
+
   }
 
   return (
