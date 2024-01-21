@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     width: 250,
     marginVertical: 3,
-    position: 'absolute', // Set the position to absolute
+    // position: 'absolute', // Set the position to absolute
     // zIndex: 1, // Set a higher zIndex to make it appear over other components
   }
 })
