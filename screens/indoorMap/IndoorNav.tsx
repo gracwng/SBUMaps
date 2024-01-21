@@ -59,8 +59,13 @@ export const IndoorNav = () => {
         {/* we searching by roomNumDoorAssociation in map records */}
         <View>
 
-          <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8EBE2', padding: 10, borderRadius: 17, width: 250 }}>
-            <Icon.Search stroke="black" strokeWidth="4" width="24" height="24" style={{ marginLeft: 1, marginRight: 4 }} />
+          <View style={styles.searchBar}>
+            <Icon.Search
+              stroke="black"
+              strokeWidth="4"
+              width="24"
+              height="24"
+              style={{ marginLeft: 1, marginRight: 4 }} />
             <TextInput
               value={start}
               onChangeText={(text) => setStart(text)}
@@ -77,9 +82,7 @@ export const IndoorNav = () => {
               data={buildings.freyHall.roomNumDoorAssociation}
               input={start}
               setInput={setStart}
-
             />
-
           )
 
           )}
@@ -94,7 +97,7 @@ export const IndoorNav = () => {
 
       {/* map component: */}
 
-      <View style={{ width: windowWidth, aspectRatio }}>
+      <View style={{ width: windowWidth, aspectRatio, position: 'relative' }}>
         <ReactNativeZoomableView
           maxZoom={1.5}
           minZoom={0.5}
@@ -152,8 +155,6 @@ const styles = StyleSheet.create({
   header: {
     // how can I change the padding of the heading without changing the posiiton of the image
     paddingTop: 10,
-
-
   },
   svg: {
     flex: 1, // Take up the available space within the View
@@ -183,5 +184,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontFamily: 'Georgia'
   },
+  searchBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F8EBE2',
+    padding: 10,
+    borderRadius: 17,
+    width: 250,
+    position: 'relative'
+  }
 }
 );
