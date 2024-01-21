@@ -81,7 +81,7 @@ export const IndoorNav = () => {
       </View>
 
       {/* map component: */}
-      <View>
+      <View style = {styles.mapContainer}>
         <View style={{ width: windowWidth, aspectRatio, position: 'relative' }}>
           <ReactNativeZoomableView
             maxZoom={1.5}
@@ -154,6 +154,9 @@ const styles = StyleSheet.create({
     // viewBox: '0 0 412.8 297.6'
 
   },
+  mapContainer: {
+    padding: 20
+  },
   //can't really be used on the button component
   button: {
     backgroundColor: '#5F9EA0',
@@ -183,9 +186,10 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   searchBarContainer: {
+    padding: 0,
     position: 'absolute',
-    top: 150,
-    bottom: 10
+    top: 300,
+    bottom: 0
   }
 }
 );
