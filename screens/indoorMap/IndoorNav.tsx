@@ -48,9 +48,9 @@ export const IndoorNav = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}> */}
         <Text style={styles.screenTitle}> Frey Hall Floor 2 </Text>
-      </View>
+      {/* </View> */}
       <View style={styles.searchBarContainer}>
         {/* Search bar and user input */}
         <View style={styles.searchBar}>
@@ -130,19 +130,20 @@ export const IndoorNav = () => {
 
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
+    backgroundColor: 'gray',
     alignItems: 'center',
     justifyContent: 'center',
-
+    paddingTop: 20
   },
   header: {
     // how can I change the padding of the heading without changing the posiiton of the image
     paddingTop: 10,
+    flex: 1,
+    backgroundColor: 'black'
   },
   svg: {
     flex: 1, // Take up the available space within the View
@@ -151,11 +152,15 @@ const styles = StyleSheet.create({
     width: '100%', // Set the image width to 100% of the parent View
     height: '100%', // Set the image height to 100% of the parent View 
     backgroundColor: '#FFFAF0',
+    // backgroundColor: 'blue',
+
     // viewBox: '0 0 412.8 297.6'
 
   },
   mapContainer: {
-    padding: 20
+    flex: 1,
+    padding: 20,
+    backgroundColor: 'blue',    
   },
   //can't really be used on the button component
   button: {
@@ -171,12 +176,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   screenTitle: {
+    flex: 1,
     textAlign: 'center',
     fontSize: 30,
     fontFamily: 'Georgia',
-    padding: 20
+    padding: 20,
+    backgroundColor: 'red',
+
   },
   searchBar: {
+    // flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#F8EBE2',
@@ -186,9 +195,11 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   searchBarContainer: {
+    flex: 1, 
+    backgroundColor: 'blue',
     padding: 0,
     position: 'absolute',
-    top: 300,
+    top: 60,
     bottom: 0
   }
 }
